@@ -7,7 +7,12 @@
 import { mkdirSync, writeFileSync } from "node:fs";
 
 const LINE =
-  "The smart fridge rebooted during a firmware update and forgot what cold is — three grand for an appliance that needs a nap and a password reset.";
+  "The smart fridge rebooted mid-update and now asks for a password before opening — it guards the leftovers better than my bank.";
+
+// Gate: exactly one line, 1–160 chars, matching the competition's scorer.
+if (LINE.length < 1 || LINE.length > 160 || LINE.includes("\n")) {
+  throw new Error(`Invalid roast line: ${LINE.length} chars`);
+}
 
 mkdirSync("/output", { recursive: true });
 writeFileSync("/output/entry.txt", LINE + "\n", "utf8");
